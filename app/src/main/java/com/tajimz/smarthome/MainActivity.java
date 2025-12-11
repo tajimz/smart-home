@@ -1,10 +1,7 @@
 package com.tajimz.smarthome;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -13,14 +10,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.navigation.NavigationBarView;
+import com.tajimz.smarthome.adapter.ViewpagerMain;
 import com.tajimz.smarthome.databinding.ActivityMainBinding;
-
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
@@ -29,157 +23,47 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+        EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
+        WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView()).setAppearanceLightStatusBars(false);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, v.getPaddingBottom());
+            return insets;
+        });
 
-        // -------------------------
-        // ROOM LIST (HORIZONTAL)
-        // -------------------------
-        ArrayList<RoomModel> roomList = new ArrayList<>();
-        roomList.add(new RoomModel("Bedroom"));
-        roomList.add(new RoomModel("Living Room"));
-        roomList.add(new RoomModel("Kitchen"));
-        roomList.add(new RoomModel("Bathroom"));
-        roomList.add(new RoomModel("Store"));
-
-        binding.recyclerRoom.setLayoutManager(
-                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        );
-        binding.recyclerRoom.setAdapter(new RoomAdapter(roomList));
-
-
-        // -------------------------
-        // DEVICE LIST (VERTICAL)
-        // -------------------------
-        ArrayList<DeviceModel> deviceList = new ArrayList<>();
-        deviceList.add(new DeviceModel("Lamp Home", "Smart Bulb"));
-        deviceList.add(new DeviceModel("Fan", "Smart Fan"));
-        deviceList.add(new DeviceModel("AC", "Air Conditioner"));
-        deviceList.add(new DeviceModel("TV", "Smart TV"));
-        deviceList.add(new DeviceModel("Router", "WiFi"));
-        deviceList.add(new DeviceModel("Lamp Home", "Smart Bulb"));
-        deviceList.add(new DeviceModel("Fan", "Smart Fan"));
-        deviceList.add(new DeviceModel("AC", "Air Conditioner"));
-        deviceList.add(new DeviceModel("TV", "Smart TV"));
-        deviceList.add(new DeviceModel("Router", "WiFi"));
-
-        deviceList.add(new DeviceModel("Lamp Home", "Smart Bulb"));
-        deviceList.add(new DeviceModel("Fan", "Smart Fan"));
-        deviceList.add(new DeviceModel("AC", "Air Conditioner"));
-        deviceList.add(new DeviceModel("TV", "Smart TV"));
-        deviceList.add(new DeviceModel("Router", "WiFi"));
-        deviceList.add(new DeviceModel("Lamp Home", "Smart Bulb"));
-        deviceList.add(new DeviceModel("Fan", "Smart Fan"));
-        deviceList.add(new DeviceModel("AC", "Air Conditioner"));
-        deviceList.add(new DeviceModel("TV", "Smart TV"));
-        deviceList.add(new DeviceModel("Router", "WiFi"));
-
-        binding.recyclerDevice.setLayoutManager(new GridLayoutManager(this, 2));
-        binding.recyclerDevice.setAdapter(new DeviceAdapter(deviceList));
-
+        setupBottomNavigation();
     }
 
-    // ----------------------------------------------------------------
-    // ROOM MODEL
-    // ----------------------------------------------------------------
-    class RoomModel {
-        String name;
-        RoomModel(String name) { this.name = name; }
-    }
+    private void setupBottomNavigation(){
+        ViewpagerMain viewpagerMain = new ViewpagerMain(this);
+        binding.pager2.setAdapter(viewpagerMain);
 
-    // ----------------------------------------------------------------
-    // ROOM ADAPTER (HORIZONTAL)
-    // ----------------------------------------------------------------
-    class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.RoomHolder> {
+        binding.bnavMain.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int postion = menuItem.getItemId();
 
-        ArrayList<RoomModel> list;
+                if (postion==R.id.home) postion = 0;
+                else if (postion==R.id.device) postion = 1;
+                else if (postion==R.id.settings) postion = 2;
 
-        RoomAdapter(ArrayList<RoomModel> list) {
-            this.list = list;
-        }
+                binding.pager2.setCurrentItem(postion);
 
-        @NonNull
-        @Override
-        public RoomHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(MainActivity.this)
-                    .inflate(R.layout.item_room, parent, false);
-            return new RoomHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull RoomHolder holder, int position) {
-            RoomModel model = list.get(position);
-            //holder.title.setText(model.name);
-        }
-
-        @Override
-        public int getItemCount() {
-            return list.size();
-        }
-
-        class RoomHolder extends RecyclerView.ViewHolder {
-            TextView title;
-            RoomHolder(@NonNull View itemView) {
-                super(itemView);
-                // change ID to your TextView ID inside item_room.xml
-                //title = itemView.findViewById(R.id.textView);
+                return true;
             }
-        }
-    }
-
-    // ----------------------------------------------------------------
-    // DEVICE MODEL
-    // ----------------------------------------------------------------
-    class DeviceModel {
-        String name, type;
-
-        DeviceModel(String name, String type) {
-            this.name = name;
-            this.type = type;
-        }
-    }
-
-    // ----------------------------------------------------------------
-    // DEVICE ADAPTER (VERTICAL)
-    // ----------------------------------------------------------------
-    class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceHolder> {
-
-        ArrayList<DeviceModel> list;
-
-        DeviceAdapter(ArrayList<DeviceModel> list) {
-            this.list = list;
-        }
-
-        @NonNull
-        @Override
-        public DeviceHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(MainActivity.this)
-                    .inflate(R.layout.item_device, parent, false);
-            return new DeviceHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull DeviceHolder holder, int position) {
-            DeviceModel model = list.get(position);
-
-            holder.name.setText(model.name);
-            holder.type.setText(model.type);
-        }
-
-        @Override
-        public int getItemCount() {
-            return list.size();
-        }
-
-        class DeviceHolder extends RecyclerView.ViewHolder {
-
-            TextView name, type;
-
-            DeviceHolder(@NonNull View itemView) {
-                super(itemView);
-                name = itemView.findViewById(R.id.itemName);
-                type = itemView.findViewById(R.id.itemType);
+        });
+        binding.pager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                int menuId = R.id.home;
+                if (position == 0) menuId = R.id.home;
+                else if (position == 1) menuId = R.id.device;
+                else if (position == 2) menuId = R.id.settings;
+                binding.bnavMain.setSelectedItemId(menuId);
             }
-        }
-    }
+        });
 
+    }
 }

@@ -15,133 +15,32 @@
         >
 
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/gradient_bg_radius"
-        android:padding="20dp"
-        android:id="@+id/toolBar"
-        >
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_background"
-            app:civ_border_width="1dp"
-            app:civ_border_color="#FFFFFF"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Welcome,\nTajim"
-            android:gravity="left"
-            app:layout_constraintStart_toEndOf="@id/profileImage"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textSize="23dp"
-            android:textStyle="bold"
-            android:textColor="@color/cream"
-            android:fontFamily="@font/balooda2"
-            android:lineSpacingExtra="-10dp"
-            android:layout_marginLeft="15dp"
-            />
-
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.viewpager2.widget.ViewPager2
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/toolBar"
+            android:id="@+id/pager2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bnavMain"/>
+
+
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bnavMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/body"
-            android:padding="10dp"
-            >
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20:8\nDhaka, Bangladesh"
-                android:padding="10dp"
-                android:textSize="18dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                />
+            app:menu="@menu/item_banv"
+            app:labelVisibilityMode="labeled"
+            android:background="@color/white"
 
-            <TextView
-                android:id="@+id/tvTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="24° C"
-                android:padding="10dp"
-                android:textSize="25dp"
-                app:layout_constraintBottom_toBottomOf="@id/tvDate"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:drawableStart="@drawable/baseline_cloud_queue_24"
-                android:drawablePadding="15dp"
+            />
 
-                />
-
-            <TextView
-                android:id="@+id/tvRoom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Room"
-                app:layout_constraintTop_toBottomOf="@id/tvDate"
-                android:textSize="22dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:fontFamily="@font/balooda2"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerRoom"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                app:layout_constraintTop_toBottomOf="@id/tvRoom"
-                />
-
-            <TextView
-                android:id="@+id/tvDevice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Device"
-                app:layout_constraintTop_toBottomOf="@id/recyclerRoom"
-                android:textSize="22dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:fontFamily="@font/balooda2"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerDevice"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toBottomOf="@id/tvDevice"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
-
-
-
-
-
-
-
-
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            app:layout_constraintBottom_toTopOf="@id/bnavMain"
+            android:background="@color/lightBlack"/>
 
 
 
