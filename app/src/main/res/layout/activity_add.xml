@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".add.AddActivity"
+    android:background="@color/theme1">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="10dp"
+
+        >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvReason"
+        android:text="Add New Room: "/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edLayName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        app:layout_constraintTop_toBottomOf="@+id/tvReason"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edLayType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Device Type"
+            app:layout_constraintTop_toBottomOf="@+id/edLayName"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edLayTurnOn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Turn On Command"
+        app:layout_constraintTop_toBottomOf="@+id/edLayType"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edTurnOn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/edLayTurnOff"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Turn Off Command"
+    app:layout_constraintTop_toBottomOf="@+id/edLayTurnOn"
+        >
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edTurnOff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cornerRadius="5dp"
+        app:layout_constraintTop_toBottomOf="@id/edLayTurnOff"
+        android:text="Add"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

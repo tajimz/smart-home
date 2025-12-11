@@ -1,12 +1,19 @@
 package com.tajimz.smarthome.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
 import com.tajimz.smarthome.helper.CONSTANTS;
+import com.tajimz.smarthome.model.DeviceModel;
+import com.tajimz.smarthome.model.RoomModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SqliteDB extends SQLiteOpenHelper {
     public SqliteDB(Context context) {
@@ -28,6 +35,65 @@ public class SqliteDB extends SQLiteOpenHelper {
         onCreate(db);
 
     }
+
+    public List<RoomModel> getRooms(){
+        List<RoomModel> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM roomList", null);
+
+        while (cursor.moveToNext()){
+            String name = cursor.getString(1);
+            String icon = cursor.getString(2);
+            String id = cursor.getString(0);
+            list.add(new RoomModel(id, name, icon));
+        }
+        return list;
+
+
+    }
+
+    public void insertRoom(String roomName, String roomIcon){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("roomName", roomName);
+        contentValues.put("roomIcon", roomIcon);
+        db.insert("roomList", null, contentValues);
+
+    }
+
+    public List<DeviceModel> getDevices (String roomId){
+        List<DeviceModel> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM deviceList WHERE roomID ="+roomId, null);
+
+        while (cursor.moveToNext()){
+            String id = cursor.getString(0);
+            String name = cursor.getString(1);
+            String icon = cursor.getString(2);
+            String type = cursor.getString(3);
+            String onCMD = cursor.getString(4);
+            String offCMD = cursor.getString(5);
+            String roomID = cursor.getString(6);
+            list.add(new DeviceModel(id, name, icon, type, onCMD, offCMD, roomID));
+        }
+        return list;
+
+
+
+    }
+
+    public void insertDevice(String name, String icon, String type, String onCmd, String offCmd, String roomId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("deviceName", name);
+        contentValues.put("deviceIcon", icon);
+        contentValues.put("deviceType", type);
+        contentValues.put("turnOnCMD", onCmd);
+        contentValues.put("turnOfCMD", offCmd);
+        contentValues.put("roomID", roomId);
+        db.insert("deviceList", null, contentValues);
+    }
+
 
 
 }
