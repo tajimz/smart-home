@@ -1,5 +1,6 @@
 package com.tajimz.smarthome.bnav;
 
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.content.Intent;
@@ -50,7 +51,7 @@ public class DeviceFragment extends Fragment {
             binding.tvRoomNotFound.setVisibility(VISIBLE);
 
         }
-        recyclerRoomAdapter = new RecyclerRoomAdapter(getContext(), list);
+        recyclerRoomAdapter = new RecyclerRoomAdapter(getContext(), list, false,null);
         binding.recyclerDevice.setAdapter(recyclerRoomAdapter);
         binding.recyclerDevice.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerInited = true;
@@ -84,6 +85,7 @@ public class DeviceFragment extends Fragment {
         recyclerRoomAdapter.notifyDataSetChanged();
 
         if (list.isEmpty()) binding.tvRoomNotFound.setVisibility(VISIBLE);
+        else binding.tvRoomNotFound.setVisibility(GONE);
 
 
     }

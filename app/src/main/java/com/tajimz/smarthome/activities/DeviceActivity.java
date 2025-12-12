@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.tajimz.smarthome.R;
@@ -55,7 +56,7 @@ public class DeviceActivity extends AppCompatActivity {
         }
         recyclerDeviceAdapter = new RecyclerDeviceAdapter(this, list);
         binding.recyclerDevice.setAdapter(recyclerDeviceAdapter);
-        binding.recyclerDevice.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerDevice.setLayoutManager(new GridLayoutManager(this,2));
         recyclerInited = true;
 
 
