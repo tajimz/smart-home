@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.tajimz.smarthome.R;
 import com.tajimz.smarthome.adapter.RecyclerDeviceAdapter;
 import com.tajimz.smarthome.adapter.RecyclerRoomAdapter;
 import com.tajimz.smarthome.databinding.FragmentHomeBinding;

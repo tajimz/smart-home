@@ -11,10 +11,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.google.android.material.navigation.NavigationBarView;
 import com.tajimz.smarthome.adapter.ViewpagerMain;
 import com.tajimz.smarthome.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
@@ -23,14 +23,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        EdgeToEdge.enable(this);
+
         setContentView(binding.getRoot());
-        WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView()).setAppearanceLightStatusBars(false);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, v.getPaddingBottom());
-            return insets;
-        });
+        setupEdgeToEdgePadding();
+
 
         setupBottomNavigation();
     }
@@ -65,5 +61,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void setupEdgeToEdgePadding(){
+        EdgeToEdge.enable(this);
+        WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView()).setAppearanceLightStatusBars(false);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, v.getPaddingBottom());
+            return insets;
+        });
     }
 }

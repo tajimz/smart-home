@@ -2,28 +2,19 @@ package com.tajimz.smarthome.activities;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import com.tajimz.smarthome.R;
 import com.tajimz.smarthome.adapter.RecyclerDeviceAdapter;
 import com.tajimz.smarthome.add.AddActivity;
 import com.tajimz.smarthome.databinding.ActivityDeviceBinding;
+import com.tajimz.smarthome.helper.BaseActivity;
 import com.tajimz.smarthome.model.DeviceModel;
 import com.tajimz.smarthome.sqlite.SqliteDB;
 
 import java.util.List;
 
-public class DeviceActivity extends AppCompatActivity {
+public class DeviceActivity extends BaseActivity {
     SqliteDB sqliteDB;
     List<DeviceModel> list;
     String roomId;
@@ -35,14 +26,9 @@ public class DeviceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         binding = ActivityDeviceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        setupEdgeToEdge();
         setupRecycler();
         setupClickListener();
     }

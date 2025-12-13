@@ -4,18 +4,13 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.tajimz.smarthome.R;
 import com.tajimz.smarthome.adapter.RecyclerRoomAdapter;
 import com.tajimz.smarthome.add.AddActivity;
 import com.tajimz.smarthome.databinding.FragmentDeviceBinding;

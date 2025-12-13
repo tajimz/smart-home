@@ -2,10 +2,7 @@ package com.tajimz.smarthome.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +11,6 @@ import com.tajimz.smarthome.R;
 import com.tajimz.smarthome.databinding.ItemIconBinding;
 import com.tajimz.smarthome.model.IconModel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class RecyclerIconAdapter extends RecyclerView.Adapter<RecyclerIconAdapter.IconViewHolder> {

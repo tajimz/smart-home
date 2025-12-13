@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.tajimz.smarthome.R;
 import com.tajimz.smarthome.adapter.RecyclerIconAdapter;
 import com.tajimz.smarthome.databinding.ActivityAddBinding;
+import com.tajimz.smarthome.helper.BaseActivity;
 import com.tajimz.smarthome.model.IconModel;
 import com.tajimz.smarthome.sqlite.SqliteDB;
 
@@ -23,7 +24,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddActivity extends AppCompatActivity {
+public class AddActivity extends BaseActivity {
     ActivityAddBinding binding;
     String reason, roomId;
     RecyclerIconAdapter recyclerIconAdapter;
@@ -31,15 +32,11 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         binding = ActivityAddBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView()).setAppearanceLightStatusBars(false);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        setupEdgeToEdge();
+
+
         handleLogic();
         setupClickListeners();
         setupRecycler();
