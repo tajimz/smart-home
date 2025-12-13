@@ -8,55 +8,93 @@
     tools:context=".activities.DeviceActivity"
     android:background="@color/theme1"
     >
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
 
-        android:background="@color/white"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
         android:padding="10dp"
         >
-        <TextView
-            android:id="@+id/tvDevice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Devices of Bed Room"
-            android:fontFamily="@font/balooda2"
-            android:textStyle="bold"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerDevice"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/tvDevice"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-
-        <TextView
-            android:id="@+id/tvDeviceNotFound"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No Devices Found"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/baseline_arrow_back"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:visibility="gone"/>
+            app:tint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnAdd"
+        <TextView
+            android:id="@+id/tvReason"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_add"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Devices of BedRoom"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-
+            app:layout_constraintStart_toEndOf="@id/imgBack"
+            android:layout_marginLeft="15dp"
+            android:textSize="20dp"
+            android:fontFamily="@font/balooda2"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textStyle="bold"
             />
+
+
+
+        <ImageView
+            android:id="@+id/btnAdd"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/baseline_add"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:tint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_corner_radius"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionBar"
+        android:layout_margin="5dp"
+        android:backgroundTint="@color/white"
+        >
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/recyclerDevice"
+
+            />
+
+        <TextView
+            android:id="@+id/tvDeviceNotFound"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Devices Found"
+            android:visibility="gone"
+            />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,10 +42,10 @@
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:src="@drawable/baseline_bulb"
-                    app:tint="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/switchBtn"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/theme1"
                     />
 
                 <TextView
@@ -69,8 +69,6 @@
                     android:textSize="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:translationY="-5dp"/>
-
-
 
 
 

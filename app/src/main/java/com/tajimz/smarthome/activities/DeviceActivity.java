@@ -59,6 +59,8 @@ public class DeviceActivity extends BaseActivity {
             intent.putExtra("roomId", roomId);
             startActivity(intent);
         });
+
+        binding.imgBack.setOnClickListener(v->{onBackPressed();});
     }
 
     @Override
