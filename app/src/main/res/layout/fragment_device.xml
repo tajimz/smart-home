@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Controller Status: Disconnected"
         android:fontFamily="@font/balooda2"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
@@ -34,7 +34,8 @@
         android:layout_height="wrap_content"
         android:text="Rooms :"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/tvController"/>
+        app:layout_constraintTop_toBottomOf="@id/tvController"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerDevice"

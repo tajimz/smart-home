@@ -56,7 +56,7 @@
                     app:layout_constraintTop_toBottomOf="@id/imgItem"
                     android:fontFamily="@font/balooda2"
                     android:textStyle="bold"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="parent"/>
                 <TextView
@@ -66,7 +66,7 @@
                     android:text="smart bulb"
                     app:layout_constraintTop_toBottomOf="@id/itemName"
                     android:fontFamily="@font/balooda2"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:translationY="-5dp"/>
 
