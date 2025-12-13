@@ -1,5 +1,6 @@
 package com.tajimz.smarthome.activities;
 
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.content.Intent;
@@ -82,6 +83,7 @@ public class DeviceActivity extends AppCompatActivity {
         list.addAll(sqliteDB.getDevices(roomId));
         recyclerDeviceAdapter.notifyDataSetChanged();
         if (list.isEmpty()) binding.tvDeviceNotFound.setVisibility(VISIBLE);
+        else binding.tvDeviceNotFound.setVisibility(GONE);
 
     }
 }

@@ -51,6 +51,8 @@ public class HomeFragment extends Fragment {
                  binding.recyclerDevice.setAdapter(recyclerDeviceAdapter);
                  binding.recyclerDevice.setLayoutManager(new GridLayoutManager(getContext(), 2));
                 lastRoomId = roomModel.getRoomId();
+                if (deviceList.isEmpty()) binding.tvNoDeviceFound.setVisibility(VISIBLE);
+                else binding.tvNoDeviceFound.setVisibility(GONE);
             }
         });
         binding.recyclerRoom.setAdapter(recyclerRoomAdapter);
@@ -78,12 +80,18 @@ public class HomeFragment extends Fragment {
 
 
 
-        if (deviceList == null) return;
 
-        binding.tvNoDeviceFound.setVisibility(GONE);
-        deviceList.clear();
-        deviceList.addAll(sqliteDB.getDevices(lastRoomId));
-        recyclerDeviceAdapter.notifyDataSetChanged();
+        try {
+            deviceList.clear();
+            deviceList.addAll(sqliteDB.getDevices(lastRoomId));
+            recyclerDeviceAdapter.notifyDataSetChanged();
+            if (!deviceList.isEmpty()) binding.tvNoDeviceFound.setVisibility(GONE);
+            else binding.tvNoDeviceFound.setVisibility(VISIBLE);
+
+        } catch (RuntimeException e) {
+            binding.tvNoDeviceFound.setVisibility(VISIBLE);
+
+        }
 
 
     }
