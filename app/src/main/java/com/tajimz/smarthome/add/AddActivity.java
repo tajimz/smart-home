@@ -104,7 +104,7 @@ public class AddActivity extends AppCompatActivity {
 
         recyclerIconAdapter = new RecyclerIconAdapter(this, list);
         binding.recyclerIcon.setAdapter(recyclerIconAdapter);
-        binding.recyclerIcon.setLayoutManager(new GridLayoutManager(this, 6));
+        binding.recyclerIcon.setLayoutManager(new GridLayoutManager(this, 5));
 
     }
 }
