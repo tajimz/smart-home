@@ -82,6 +82,12 @@ public class SqliteDB extends SQLiteOpenHelper {
 
     }
 
+    public int getDeviceCount(String roomId){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM deviceList WHERE roomID ="+roomId, null);
+        return cursor.getCount();
+    }
+
     public void insertDevice(String name, String icon, String type, String onCmd, String offCmd, String roomId){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

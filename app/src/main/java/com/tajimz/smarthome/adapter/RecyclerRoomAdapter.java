@@ -19,6 +19,7 @@ import com.tajimz.smarthome.activities.DeviceActivity;
 import com.tajimz.smarthome.databinding.ItemRoom2Binding;
 import com.tajimz.smarthome.databinding.ItemRoomBinding;
 import com.tajimz.smarthome.model.RoomModel;
+import com.tajimz.smarthome.sqlite.SqliteDB;
 
 import java.util.List;
 
@@ -29,12 +30,14 @@ public class RecyclerRoomAdapter extends RecyclerView.Adapter<RecyclerRoomAdapte
     OnItemClickListener onItemClickListener;
     int selectedPosition = 0;
     Boolean firstLoad = false;
+    SqliteDB sqliteDB;
 
     public RecyclerRoomAdapter(Context context, List<RoomModel> list, Boolean forHome, OnItemClickListener onItemClickListener){
         this.list = list;
         this.context = context;
         this.forHome = forHome;
         this.onItemClickListener = onItemClickListener;
+        this.sqliteDB = new SqliteDB(context);
 
     }
     public interface OnItemClickListener {
@@ -82,6 +85,7 @@ public class RecyclerRoomAdapter extends RecyclerView.Adapter<RecyclerRoomAdapte
             ItemRoom2Binding binding = (ItemRoom2Binding) holder.binding;
             binding.tvRoomName.setText(roomModel.getRoomName());
             binding.imgRoom2.setImageResource(Integer.parseInt(roomModel.getRoomIcon()));
+            binding.tvRoomDevices.setText(sqliteDB.getDeviceCount(roomModel.getRoomId())+" Devices");
             binding.imgMenu.setOnClickListener(v->{
                 PopupMenu menu = new PopupMenu(context, v);
                 menu.getMenuInflater().inflate(R.menu.menu_room, menu.getMenu());

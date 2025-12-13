@@ -24,6 +24,7 @@
                 android:background="@color/grey"
                 android:padding="10dp"
                 android:id="@+id/deviceParent"
+
                 >
 
                 <Switch
@@ -32,7 +33,8 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:thumbTint="@color/theme1"
+                    android:track="@drawable/bg_track"
+                    android:thumb="@drawable/ic_thumb"
                     />
 
                 <ImageView
