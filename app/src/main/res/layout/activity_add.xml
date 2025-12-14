@@ -91,25 +91,39 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/edLayType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Device Type"
             app:layout_constraintTop_toBottomOf="@+id/edLayName"
-            app:boxStrokeColor="@color/theme2"
-            app:hintTextColor="@color/theme2"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_corner_radius_spinner"
+
             >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edType"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawableStart="@drawable/baseline_device"
-                android:drawablePadding="10dp"
-                android:drawableTint="@color/theme1"
+
+            <ImageView
+                android:id="@+id/imgDevice"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/baseline_device"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="15dp"
+                app:tint="@color/theme1"/>
+            <Spinner
+                android:id="@+id/spinCategory"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:entries="@array/categories"
+                app:layout_constraintStart_toEndOf="@id/imgDevice"
+                app:layout_constraintEnd_toEndOf="parent"
                 />
 
-        </com.google.android.material.textfield.TextInputLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout

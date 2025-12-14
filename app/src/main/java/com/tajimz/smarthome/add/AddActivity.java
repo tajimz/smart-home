@@ -60,14 +60,14 @@ public class AddActivity extends BaseActivity {
 
         binding.btnAdd.setOnClickListener(v->{
             String name = binding.edName.getText().toString();
-            String type = binding.edType.getText().toString();
+            String type = binding.spinCategory.getSelectedItem().toString();
             String onCmd = binding.edTurnOn.getText().toString();
             String ofCmd = binding.edTurnOff.getText().toString();
             String icon = recyclerIconAdapter.getSelected();
             if (name.isEmpty()) return;
 
             if (reason.equals("device")){
-                if (type.isEmpty() || onCmd.isEmpty() || ofCmd.isEmpty()) return;
+                if (type.isEmpty() || onCmd.isEmpty() || ofCmd.isEmpty() || type.equals("Select Category")) return;
                 sqliteDB.insertDevice(name, icon, type, onCmd, ofCmd,roomId );
                 Toast.makeText(this, "Created Device : "+name, Toast.LENGTH_SHORT).show();
 

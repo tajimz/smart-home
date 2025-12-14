@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Smart Home</string>
+
+
+    <string-array name="categories">
+        <item>Select Category</item>
+        <item>Light</item>
+        <item>Fan</item>
+        <item>AC / Heater</item>
+        <item>Plugs</item>
+        <item>Security</item>
+        <item>Camera</item>
+        <item>Appliance</item>
+    </string-array>
 </resources>
