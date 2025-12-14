@@ -1,5 +1,6 @@
 package com.tajimz.smarthome;
 
+import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -15,9 +16,13 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.tajimz.smarthome.adapter.ViewpagerMain;
 import com.tajimz.smarthome.databinding.ActivityMainBinding;
 
+import ai.bongotech.bt.BongoBT;
+
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    public static boolean deviceConnected;
+    public static BongoBT bongoBT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setupEdgeToEdgePadding();
 
-
+        checkDeviceConnected();
         setupBottomNavigation();
     }
 
@@ -70,5 +75,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, v.getPaddingBottom());
             return insets;
         });
+    }
+
+    private void checkDeviceConnected(){
+         bongoBT = new BongoBT(this);
+        BluetoothDevice device = bongoBT.getConnectedDevice();
+        deviceConnected = device != null;
+
+
     }
 }

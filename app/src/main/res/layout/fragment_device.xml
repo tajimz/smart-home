@@ -18,6 +18,21 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
+    <TextView
+        android:id="@+id/tvConnectController"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect"
+        android:textStyle="bold"
+        android:fontFamily="@font/balooda2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvController"
+        app:layout_constraintBottom_toBottomOf="@id/tvController"
+        android:textSize="18sp"
+
+        />
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"

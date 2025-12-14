@@ -1,23 +1,31 @@
 package com.tajimz.smarthome.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.tajimz.smarthome.MainActivity;
 import com.tajimz.smarthome.databinding.ItemDeviceBinding;
 import com.tajimz.smarthome.model.DeviceModel;
 
 import java.util.List;
 
+import ai.bongotech.bt.BongoBT;
+
 public class RecyclerDeviceAdapter extends RecyclerView.Adapter<RecyclerDeviceAdapter.DeviceViewHolder> {
     Context context;
     List<DeviceModel> list;
+    BongoBT bongoBT;
 
     public RecyclerDeviceAdapter(Context context, List<DeviceModel> list){
         this.context = context;
         this.list = list;
+        bongoBT = MainActivity.bongoBT;
     }
     @NonNull
     @Override
@@ -33,7 +41,23 @@ public class RecyclerDeviceAdapter extends RecyclerView.Adapter<RecyclerDeviceAd
         holder.binding.itemName.setText(deviceModel.getDeviceName());
         holder.binding.itemType.setText(deviceModel.getDeviceType());
         holder.binding.imgItem.setImageResource(Integer.parseInt(deviceModel.getDeviceIcon()));
+        holder.binding.switchBtn.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (bongoBT.getConnectedDevice()==null) {
+                Toast.makeText(context, "Controller Not connected", Toast.LENGTH_SHORT).show();
+                buttonView.setChecked(!isChecked);
+                return;
+            }
+            if (isChecked) {
+                Toast.makeText(context, "on", Toast.LENGTH_SHORT).show();
+                bongoBT.sendCommand(deviceModel.getTurnOnCMD());
+                Log.d("bongoBT", deviceModel.getTurnOnCMD());
+            }
+            else {
+                bongoBT.sendCommand(deviceModel.getTurnOffCMD());
+                Log.d("bongoBT", deviceModel.getTurnOffCMD());
+            }
 
+        });
 
 
 
