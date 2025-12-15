@@ -103,6 +103,9 @@ public class MainActivity extends BaseActivity {
             public void onReceived(String message) {
 
                 Log.d("bongoBT", message);
+                if (message.startsWith("TEMP: ")) {
+                    bluetoothHelper.setTemp(message.substring(6));
+                }
             }
 
             @Override

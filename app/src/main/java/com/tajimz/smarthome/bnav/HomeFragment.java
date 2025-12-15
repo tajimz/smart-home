@@ -21,10 +21,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.tajimz.smarthome.MainActivity;
 import com.tajimz.smarthome.adapter.RecyclerDeviceAdapter;
 import com.tajimz.smarthome.adapter.RecyclerRoomAdapter;
 import com.tajimz.smarthome.databinding.FragmentHomeBinding;
 import com.tajimz.smarthome.helper.AlarmHelper;
+import com.tajimz.smarthome.helper.BluetoothHelper;
 import com.tajimz.smarthome.model.DeviceModel;
 import com.tajimz.smarthome.model.RoomModel;
 import com.tajimz.smarthome.sqlite.SqliteDB;
@@ -42,6 +44,7 @@ public class HomeFragment extends Fragment {
     RecyclerDeviceAdapter recyclerDeviceAdapter;
 
     String lastRoomId = "0";
+    BluetoothHelper bluetoothHelper;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class HomeFragment extends Fragment {
         return binding.getRoot();
     }
     private void setupRecyclerRoom(){
+        bluetoothHelper = MainActivity.bluetoothHelper;
         sqliteDB = new SqliteDB(getContext());
         list = sqliteDB.getRooms();
         recyclerRoomAdapter = new RecyclerRoomAdapter(getContext(), list, true, new RecyclerRoomAdapter.OnItemClickListener() {
@@ -86,6 +90,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        binding.tvTemp.setText(bluetoothHelper.getTemp()+"° C");
         list.clear();
         list.addAll(sqliteDB.getRooms());
 
