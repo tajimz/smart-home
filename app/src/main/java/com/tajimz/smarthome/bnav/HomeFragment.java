@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -90,7 +91,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        binding.tvTemp.setText(bluetoothHelper.getTemp()+"° C");
+        binding.tvTemp.setText(bluetoothHelper.getTemp().trim()+"° C");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                binding.tvTemp.setText(bluetoothHelper.getTemp().trim()+"° C");
+            }
+        },4000);
         list.clear();
         list.addAll(sqliteDB.getRooms());
 
