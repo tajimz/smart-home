@@ -5,9 +5,12 @@ import static android.view.View.VISIBLE;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.tajimz.smarthome.adapter.RecyclerDeviceAdapter;
 import com.tajimz.smarthome.add.AddActivity;
 import com.tajimz.smarthome.databinding.ActivityDeviceBinding;
+import com.tajimz.smarthome.databinding.BottomItemDeviceBinding;
 import com.tajimz.smarthome.helper.BaseActivity;
 import com.tajimz.smarthome.model.DeviceModel;
 import com.tajimz.smarthome.sqlite.SqliteDB;
@@ -41,7 +44,33 @@ public class DeviceActivity extends BaseActivity {
             binding.tvDeviceNotFound.setVisibility(VISIBLE);
 
         }
-        recyclerDeviceAdapter = new RecyclerDeviceAdapter(this, list,null);
+        recyclerDeviceAdapter = new RecyclerDeviceAdapter(this, list, new RecyclerDeviceAdapter.OnDeviceClickListener() {
+            @Override
+            public void onDeviceClick(DeviceModel deviceModel) {
+                BottomItemDeviceBinding deviceBinding = BottomItemDeviceBinding.inflate(getLayoutInflater());
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(DeviceActivity.this);
+                bottomSheetDialog.setContentView(deviceBinding.getRoot());
+
+                deviceBinding.editDevice.setOnClickListener(v->{
+                    bottomSheetDialog.dismiss();
+                    Intent intent = new Intent(DeviceActivity.this, AddActivity.class);
+                    intent.putExtra("reason", "device_edit");
+                    intent.putExtra("deviceModel", deviceModel);
+                    startActivity(intent);
+
+                });
+                deviceBinding.deleteDevice.setOnClickListener(v->{
+                    bottomSheetDialog.dismiss();
+                    sqliteDB.deleteDevice(deviceModel.getDeviceId());
+                    refresh();
+
+
+                });
+                bottomSheetDialog.show();
+
+
+            }
+        });
         binding.recyclerDevice.setAdapter(recyclerDeviceAdapter);
         binding.recyclerDevice.setLayoutManager(new GridLayoutManager(this,2));
         recyclerInited = true;
@@ -67,11 +96,16 @@ public class DeviceActivity extends BaseActivity {
     protected void onPostResume() {
         super.onPostResume();
         if (!recyclerInited) return;
+        refresh();
+
+
+    }
+
+    private void refresh(){
         list.clear();
         list.addAll(sqliteDB.getDevices(roomId));
         recyclerDeviceAdapter.notifyDataSetChanged();
         if (list.isEmpty()) binding.tvDeviceNotFound.setVisibility(VISIBLE);
         else binding.tvDeviceNotFound.setVisibility(GONE);
-
     }
 }

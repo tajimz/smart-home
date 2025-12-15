@@ -17,6 +17,7 @@ import com.tajimz.smarthome.R;
 import com.tajimz.smarthome.adapter.RecyclerIconAdapter;
 import com.tajimz.smarthome.databinding.ActivityAddBinding;
 import com.tajimz.smarthome.helper.BaseActivity;
+import com.tajimz.smarthome.model.DeviceModel;
 import com.tajimz.smarthome.model.IconModel;
 import com.tajimz.smarthome.model.RoomModel;
 import com.tajimz.smarthome.sqlite.SqliteDB;
@@ -31,6 +32,7 @@ public class AddActivity extends BaseActivity {
     RecyclerIconAdapter recyclerIconAdapter;
     List<IconModel> list = new ArrayList<>();
     RoomModel roomModel;
+    DeviceModel deviceModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +64,13 @@ public class AddActivity extends BaseActivity {
              binding.tvReason.setText("Edit Room: "+roomModel.getRoomName());
              binding.edName.setText(roomModel.getRoomName());
 
+         }else if (reason.equals("device_edit")){
+             deviceModel = (DeviceModel) getIntent().getSerializableExtra("deviceModel");
+             binding.tvReason.setText("Edit Device: "+deviceModel.getDeviceName());
+             binding.edName.setText(deviceModel.getDeviceName());
+             binding.edTurnOn.setText(deviceModel.getTurnOnCMD());
+             binding.edTurnOff.setText(deviceModel.getTurnOffCMD());
+
          }
 
     }
@@ -88,6 +97,11 @@ public class AddActivity extends BaseActivity {
             }else if (reason.equals("room_edit")){
                 sqliteDB.editRoom(roomModel.getRoomId(), name, icon);
                 Toast.makeText(this, "Edited Room : "+name, Toast.LENGTH_SHORT).show();
+
+            }else if (reason.equals("device_edit")){
+                if (type.isEmpty() || onCmd.isEmpty() || ofCmd.isEmpty() || type.equals("Select Category")) return;
+                sqliteDB.editDevice(deviceModel.getDeviceId(), name,  type,icon, onCmd, ofCmd );
+                Toast.makeText(this, "Edited Device : "+name, Toast.LENGTH_SHORT).show();
 
             }
 

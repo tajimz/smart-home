@@ -123,6 +123,24 @@ public class SqliteDB extends SQLiteOpenHelper {
         db.execSQL(sql);
     }
 
+    public void deleteDevice(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "DELETE FROM deviceList WHERE id = " + id;
+        db.execSQL(sql);
+
+
+    }
+    public void editDevice(String deviceId, String deviceName, String deviceType , String deviceIcon, String turnOnCmd, String turnOffCmd) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("deviceName", deviceName);
+        values.put("deviceIcon", deviceIcon);
+        values.put("deviceType", deviceType);
+        values.put("turnOnCMD", turnOnCmd);
+        values.put("turnOfCMD", turnOffCmd);
+
+        db.update("deviceList", values, "id = ?", new String[]{deviceId});
+    }
 
 
 

@@ -1,6 +1,8 @@
 package com.tajimz.smarthome.model;
 
-public class DeviceModel {
+import java.io.Serializable;
+
+public class DeviceModel implements Serializable {
     String deviceName, deviceId, deviceType, turnOnCMD, turnOffCMD, deviceIcon, roomId;
     long alarm;
 
