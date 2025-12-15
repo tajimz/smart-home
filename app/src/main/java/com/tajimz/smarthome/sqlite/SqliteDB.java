@@ -10,6 +10,7 @@ import com.tajimz.smarthome.model.DeviceModel;
 import com.tajimz.smarthome.model.RoomModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class SqliteDB extends SQLiteOpenHelper {
@@ -61,7 +62,14 @@ public class SqliteDB extends SQLiteOpenHelper {
     public List<DeviceModel> getDevices (String roomId){
         List<DeviceModel> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM deviceList WHERE roomID ="+roomId, null);
+        Cursor cursor;
+        if (roomId.equals("all")){
+            cursor = db.rawQuery("SELECT * FROM deviceList", null);
+
+        }else {
+            cursor = db.rawQuery("SELECT * FROM deviceList WHERE roomID ="+roomId, null);
+
+        }
 
         while (cursor.moveToNext()){
             String id = cursor.getString(0);
@@ -140,6 +148,29 @@ public class SqliteDB extends SQLiteOpenHelper {
         values.put("turnOfCMD", turnOffCmd);
 
         db.update("deviceList", values, "id = ?", new String[]{deviceId});
+    }
+
+    public List<DeviceModel> getDevicesScheduled (){
+        List<DeviceModel> list = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM deviceList WHERE alarm > "+calendar.getTimeInMillis(), null);
+
+        while (cursor.moveToNext()){
+            String id = cursor.getString(0);
+            String name = cursor.getString(1);
+            String icon = cursor.getString(2);
+            String type = cursor.getString(3);
+            String onCMD = cursor.getString(4);
+            String offCMD = cursor.getString(5);
+            String roomID = cursor.getString(6);
+            long alarm = cursor.getLong(7);
+            list.add(new DeviceModel(id, name, icon, type, onCMD, offCMD, roomID, alarm));
+        }
+        return list;
+
+
+
     }
 
 

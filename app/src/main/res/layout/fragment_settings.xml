@@ -3,15 +3,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".bnav.SettingsFragment"
-    android:background="@color/theme1">
+    android:padding="10dp">
 
-<!--    This fragment will be used for scheduling , instead of settings -->
     <TextView
+        android:id="@+id/tvController"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Schedule a new task"
+        android:fontFamily="@font/balooda2"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
+
+    <TextView
+        android:id="@+id/tvRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upcoming :"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tvController"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerSchedule"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Schedule ...!"
-        android:gravity="center"
-        android:textColor="@color/white"/>
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tvRoom"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvScheduleNotFound"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Schedule Found"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

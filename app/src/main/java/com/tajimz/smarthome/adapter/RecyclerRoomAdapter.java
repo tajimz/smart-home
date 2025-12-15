@@ -99,6 +99,7 @@ public class RecyclerRoomAdapter extends RecyclerView.Adapter<RecyclerRoomAdapte
             binding.roomParent.setOnClickListener(v->{
                 Intent intent = new Intent(context, DeviceActivity.class);
                 intent.putExtra("roomId", roomModel.getRoomId());
+                intent.putExtra("title", "Devices of "+ roomModel.getRoomName());
                 context.startActivity(intent);
             });
         }

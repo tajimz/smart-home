@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
                  recyclerDeviceAdapter = new RecyclerDeviceAdapter(getContext(), deviceList, new RecyclerDeviceAdapter.OnDeviceClickListener() {
                      @Override
                      public void onDeviceClick(DeviceModel deviceModel) {
-                         showDatePicker(deviceModel);
+
                      }
                  });
                  binding.recyclerDevice.setAdapter(recyclerDeviceAdapter);
@@ -124,86 +124,6 @@ public class HomeFragment extends Fragment {
     }
 
 
-    Calendar calendar = Calendar.getInstance();
-    private void showDatePicker(DeviceModel deviceModel){
-        if (!checkAlarmPermission()){
-            sendToGrantAlarm();
-            Toast.makeText(getContext(), "You must allow alarm permission to set schedule", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
-                (view, year, month, dayOfMonth)->{
 
-                    calendar.set(Calendar.YEAR, year);
-                    calendar.set(Calendar.MONTH, month);
-                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                    showTimePicker(deviceModel);
-
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH));
-
-        datePickerDialog.show();
-    }
-
-    private void showTimePicker(DeviceModel deviceModel){
-        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
-                (timeView, hourOfDay, minute)->{
-
-                    calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                    calendar.set(Calendar.MINUTE, minute);
-                    calendar.set(Calendar.SECOND, 0);
-
-                    setAlarm(calendar, deviceModel);
-
-                },
-                calendar.get(Calendar.HOUR_OF_DAY),
-                calendar.get(Calendar.MINUTE), true);
-
-        timePickerDialog.show();
-
-    }
-
-    private void setAlarm(Calendar calendar, DeviceModel deviceModel){
-
-        Intent intent = new Intent(getContext(), AlarmHelper.class);
-        intent.putExtra("time", calendar.getTimeInMillis());
-        intent.putExtra("commandToSend", deviceModel.getTurnOnCMD());
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent,
-                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        Toast.makeText(getContext(), "Alarm Has set successfully", Toast.LENGTH_SHORT).show();
-        sqliteDB.setAlarm(deviceModel.getDeviceId(), calendar.getTimeInMillis());
-
-
-
-
-
-
-    }
-
-    private Boolean checkAlarmPermission() {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-            AlarmManager alarmManager = requireContext().getSystemService(AlarmManager.class);
-            if (alarmManager != null) {
-                return alarmManager.canScheduleExactAlarms();
-            } else {
-                return false;
-            }
-        } else {
-
-            return true;
-        }
-    }
-
-    private void sendToGrantAlarm(){
-        Intent intent = new Intent(android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
-        startActivity(intent);
-
-    }
 
 }
