@@ -20,7 +20,7 @@ public class SqliteDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS roomList (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, roomName TEXT, roomIcon TEXT)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS deviceList (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, deviceName TEXT, deviceIcon TEXT,deviceType TEXT,turnOnCMD TEXT, turnOfCMD TEXT, roomID TEXT)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS deviceList (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, deviceName TEXT, deviceIcon TEXT,deviceType TEXT,turnOnCMD TEXT, turnOfCMD TEXT, roomID TEXT, alarm INTEGER)");
 
     }
 
@@ -71,7 +71,8 @@ public class SqliteDB extends SQLiteOpenHelper {
             String onCMD = cursor.getString(4);
             String offCMD = cursor.getString(5);
             String roomID = cursor.getString(6);
-            list.add(new DeviceModel(id, name, icon, type, onCMD, offCMD, roomID));
+            long alarm = cursor.getLong(7);
+            list.add(new DeviceModel(id, name, icon, type, onCMD, offCMD, roomID, alarm));
         }
         return list;
 
@@ -94,8 +95,19 @@ public class SqliteDB extends SQLiteOpenHelper {
         contentValues.put("turnOnCMD", onCmd);
         contentValues.put("turnOfCMD", offCmd);
         contentValues.put("roomID", roomId);
+        contentValues.put("alarm", 0);
         db.insert("deviceList", null, contentValues);
     }
+
+    public void setAlarm(String id, long timeInMs){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String sql = "UPDATE deviceList SET alarm = " + timeInMs +
+                " WHERE id = " + id;
+
+        db.execSQL(sql);
+    }
+
 
 
 

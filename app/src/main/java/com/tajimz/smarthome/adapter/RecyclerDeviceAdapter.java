@@ -1,5 +1,8 @@
 package com.tajimz.smarthome.adapter;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -26,12 +29,14 @@ public class RecyclerDeviceAdapter extends RecyclerView.Adapter<RecyclerDeviceAd
     List<DeviceModel> list;
     BluetoothHelper bluetoothHelper = MainActivity.bluetoothHelper;
     OnDeviceClickListener onDeviceClickListener;
+    Calendar calendar;
 
 
     public RecyclerDeviceAdapter(Context context, List<DeviceModel> list, OnDeviceClickListener onDeviceClickListener){
         this.context = context;
         this.list = list;
         this.onDeviceClickListener = onDeviceClickListener;
+
     }
 
     public interface OnDeviceClickListener{
@@ -47,8 +52,19 @@ public class RecyclerDeviceAdapter extends RecyclerView.Adapter<RecyclerDeviceAd
 
     @Override
     public void onBindViewHolder(@NonNull DeviceViewHolder holder, int position) {
+        calendar = Calendar.getInstance();
         DeviceModel deviceModel = list.get(position);
+        long alarm = deviceModel.getAlarm();
         holder.binding.itemName.setText(deviceModel.getDeviceName());
+        if (alarm > calendar.getTimeInMillis()) {
+            holder.binding.timerOn.setVisibility(VISIBLE); // future alarm
+        } else {
+            holder.binding.timerOn.setVisibility(GONE);    // past/no alarm
+        }
+
+        Log.d("bongoBT", ""+calendar.getTimeInMillis());
+        Log.d("bongoBT", ""+alarm);
+
         holder.binding.itemType.setText(deviceModel.getDeviceType());
         holder.binding.imgItem.setImageResource(Integer.parseInt(deviceModel.getDeviceIcon()));
         holder.binding.switchBtn.setOnCheckedChangeListener((buttonView, isChecked) -> {

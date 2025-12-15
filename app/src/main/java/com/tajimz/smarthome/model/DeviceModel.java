@@ -2,9 +2,10 @@ package com.tajimz.smarthome.model;
 
 public class DeviceModel {
     String deviceName, deviceId, deviceType, turnOnCMD, turnOffCMD, deviceIcon, roomId;
+    long alarm;
 
     public DeviceModel(String deviceId,String deviceName, String deviceIcon, String deviceType,
-                       String turnOnCMD, String turnOffCMD,  String roomId) {
+                       String turnOnCMD, String turnOffCMD,  String roomId, long alarm) {
         this.deviceName = deviceName;
         this.deviceId = deviceId;
         this.deviceType = deviceType;
@@ -12,6 +13,7 @@ public class DeviceModel {
         this.turnOffCMD = turnOffCMD;
         this.deviceIcon = deviceIcon;
         this.roomId = roomId;
+        this.alarm = alarm;
     }
 
     public String getDeviceName() {
@@ -40,5 +42,9 @@ public class DeviceModel {
 
     public String getRoomId() {
         return roomId;
+    }
+
+    public long getAlarm() {
+        return alarm;
     }
 }

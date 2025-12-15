@@ -163,6 +163,7 @@ public class HomeFragment extends Fragment {
         AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
         Toast.makeText(getContext(), "Alarm Has set successfully", Toast.LENGTH_SHORT).show();
+        sqliteDB.setAlarm(deviceModel.getDeviceId(), calendar.getTimeInMillis());
 
 
 
