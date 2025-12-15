@@ -41,7 +41,7 @@ public class DeviceActivity extends BaseActivity {
             binding.tvDeviceNotFound.setVisibility(VISIBLE);
 
         }
-        recyclerDeviceAdapter = new RecyclerDeviceAdapter(this, list);
+        recyclerDeviceAdapter = new RecyclerDeviceAdapter(this, list,null);
         binding.recyclerDevice.setAdapter(recyclerDeviceAdapter);
         binding.recyclerDevice.setLayoutManager(new GridLayoutManager(this,2));
         recyclerInited = true;

@@ -1,5 +1,7 @@
 package com.tajimz.smarthome.adapter;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import com.tajimz.smarthome.databinding.ItemDeviceBinding;
 import com.tajimz.smarthome.helper.BluetoothHelper;
 import com.tajimz.smarthome.model.DeviceModel;
 
+import java.util.Calendar;
 import java.util.List;
 
 import ai.bongotech.bt.BongoBT;
@@ -22,10 +25,17 @@ public class RecyclerDeviceAdapter extends RecyclerView.Adapter<RecyclerDeviceAd
     Context context;
     List<DeviceModel> list;
     BluetoothHelper bluetoothHelper = MainActivity.bluetoothHelper;
+    OnDeviceClickListener onDeviceClickListener;
 
-    public RecyclerDeviceAdapter(Context context, List<DeviceModel> list){
+
+    public RecyclerDeviceAdapter(Context context, List<DeviceModel> list, OnDeviceClickListener onDeviceClickListener){
         this.context = context;
         this.list = list;
+        this.onDeviceClickListener = onDeviceClickListener;
+    }
+
+    public interface OnDeviceClickListener{
+        void onDeviceClick(DeviceModel deviceModel);
     }
     @NonNull
     @Override
@@ -58,6 +68,9 @@ public class RecyclerDeviceAdapter extends RecyclerView.Adapter<RecyclerDeviceAd
             }
 
         });
+
+
+        holder.binding.deviceParent.setOnClickListener(v->{onDeviceClickListener.onDeviceClick(deviceModel);});
 
 
 
