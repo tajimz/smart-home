@@ -100,24 +100,23 @@ Example:
 ## 📸 Screenshots
 
 <p float="left">
-  <img src="screenshots/ss1.png" width="220" />
-  <img src="screenshots/ss2.png" width="220" />
-  <img src="screenshots/ss3.png" width="220" />
+  <img src="screenshots/ss1.png" width="200" />
+  <img src="screenshots/ss2.png" width="200" />
+  <img src="screenshots/ss3.png" width="200" />
+  <img src="screenshots/ss4.png" width="200" />
 </p>
 
 <p float="left">
-  <img src="screenshots/ss4.png" width="220" />
-  <img src="screenshots/ss5.png" width="220" />
-  <img src="screenshots/ss6.png" width="220" />
+  <img src="screenshots/ss5.png" width="200" />
+  <img src="screenshots/ss6.png" width="200" />
+  <img src="screenshots/ss7.png" width="200" />
+  <img src="screenshots/ss8.png" width="200" />
 </p>
 
 <p float="left">
-  <img src="screenshots/ss7.png" width="220" />
-  <img src="screenshots/ss8.png" width="220" />
-  <img src="screenshots/ss9.png" width="220" />
+  <img src="screenshots/ss9.png" width="200" />
+  <img src="screenshots/ss10.png" width="200" />
 </p>
-
-
 
 
 ---
