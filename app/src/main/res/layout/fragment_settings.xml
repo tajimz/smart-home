@@ -6,10 +6,11 @@
     tools:context=".bnav.SettingsFragment"
     android:background="@color/theme1">
 
+<!--    This fragment will be used for scheduling , instead of settings -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Settings ...!"
+        android:text="Schedule ...!"
         android:gravity="center"
         android:textColor="@color/white"/>
 

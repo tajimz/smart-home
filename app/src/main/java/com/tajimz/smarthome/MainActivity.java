@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (postion==R.id.home) postion = 0;
                 else if (postion==R.id.device) postion = 1;
-                else if (postion==R.id.settings) postion = 2;
+                else if (postion==R.id.schedule) postion = 2;
 
                 binding.pager2.setCurrentItem(postion);
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 int menuId = R.id.home;
                 if (position == 0) menuId = R.id.home;
                 else if (position == 1) menuId = R.id.device;
-                else if (position == 2) menuId = R.id.settings;
+                else if (position == 2) menuId = R.id.schedule;
                 binding.bnavMain.setSelectedItemId(menuId);
             }
         });

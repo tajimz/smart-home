@@ -9,9 +9,9 @@
         android:title="Devices"
         android:icon="@drawable/baseline_device"/>
     <item
-        android:id="@+id/settings"
-        android:title="Settings"
-        android:icon="@drawable/baseline_settings"/>
+        android:id="@+id/schedule"
+        android:title="Schedule"
+        android:icon="@drawable/baseline_stopwatch"/>
 
 
 </menu>

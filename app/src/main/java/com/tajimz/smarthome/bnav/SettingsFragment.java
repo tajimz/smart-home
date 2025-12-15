@@ -9,7 +9,7 @@ import com.tajimz.smarthome.R;
 
 
 public class SettingsFragment extends Fragment {
-
+//This fragment will be used as scheduler instead of settings
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
