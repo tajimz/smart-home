@@ -98,18 +98,24 @@ Example:
 ---
 
 ## 📸 Screenshots
-![Application](screenshots/ss1.png)
-![Home](screenshots/ss2.png)
-![Rooms](screenshots/ss3.png)
-![Add Room](screenshots/ss4.png)
-![Add Device](screenshots/ss5.png)
-![Preview Devices](screenshots/ss6.png)
-![Schedule Task](screenshots/ss7.png)
-![Select Time](screenshots/ss8.png)
-![Preview Tasks](screenshots/ss9.png)
-![Device Control](screenshots/ss10.png)
 
+<p float="left">
+  <img src="screenshots/ss1.png" width="220" />
+  <img src="screenshots/ss2.png" width="220" />
+  <img src="screenshots/ss3.png" width="220" />
+</p>
 
+<p float="left">
+  <img src="screenshots/ss4.png" width="220" />
+  <img src="screenshots/ss5.png" width="220" />
+  <img src="screenshots/ss6.png" width="220" />
+</p>
+
+<p float="left">
+  <img src="screenshots/ss7.png" width="220" />
+  <img src="screenshots/ss8.png" width="220" />
+  <img src="screenshots/ss9.png" width="220" />
+</p>
 
 
 
