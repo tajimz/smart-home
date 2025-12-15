@@ -109,7 +109,8 @@ public class DeviceFragment extends Fragment {
                 //disconnect
             }else {
                 //connect
-                connectController();
+                MainActivity.connectController(getContext(), ()->{checkControllerStatus();});
+
             }
         });
     }
@@ -127,30 +128,7 @@ public class DeviceFragment extends Fragment {
         }
     }
 
-    private void connectController(){
 
-        bluetoothHelper.connectToController(CONSTANTS.CONTROLLER_MAC, new BongoBT.BtConnectListener() {
-            @Override
-            public void onConnected() {
-                checkControllerStatus();
-                Log.d("bongoBT", "connected");
-            }
-
-            @Override
-            public void onReceived(String message) {
-
-                Log.d("bongoBT", message);
-            }
-
-            @Override
-            public void onError(String reason) {
-                Log.d("bongoBT", reason);
-                Toast.makeText(getContext(), reason, Toast.LENGTH_SHORT).show();
-                checkControllerStatus();
-            }
-        });
-
-    }
 
     @Override
     public void onResume() {

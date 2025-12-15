@@ -1,6 +1,10 @@
 package com.tajimz.smarthome.helper;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,4 +23,25 @@ public class BaseActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+
+    public static AlertDialog loadingDialog;
+    protected static void startLoading(Context context) {
+        if (loadingDialog == null) {
+            loadingDialog = new AlertDialog.Builder(context)
+                    .setView(LayoutInflater.from(context).inflate(R.layout.alert_loading, null))
+                    .setCancelable(false)
+                    .create();
+            if (loadingDialog.getWindow() != null)
+                loadingDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
+        loadingDialog.show();
+    }
+
+    protected static void endLoading() {
+        if (loadingDialog != null && loadingDialog.isShowing())
+            loadingDialog.dismiss();
+    }
+
+
 }

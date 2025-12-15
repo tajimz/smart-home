@@ -1,9 +1,12 @@
 package com.tajimz.smarthome;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -16,11 +19,13 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.navigation.NavigationBarView;
 import com.tajimz.smarthome.adapter.ViewpagerMain;
 import com.tajimz.smarthome.databinding.ActivityMainBinding;
+import com.tajimz.smarthome.helper.BaseActivity;
 import com.tajimz.smarthome.helper.BluetoothHelper;
+import com.tajimz.smarthome.helper.CONSTANTS;
 
 import ai.bongotech.bt.BongoBT;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     ActivityMainBinding binding;
 
@@ -81,6 +86,34 @@ public class MainActivity extends AppCompatActivity {
 
     private void initBluetoothHelper(){
         bluetoothHelper = new BluetoothHelper(this);
+       connectController(this,()->{});
+
+    }
+    public static void connectController(Context context, Runnable runnable){
+        startLoading(context);
+        bluetoothHelper.connectToController(CONSTANTS.CONTROLLER_MAC, new BongoBT.BtConnectListener() {
+            @Override
+            public void onConnected() {
+                endLoading();
+                Log.d("bongoBT", "connected");
+                runnable.run();
+            }
+
+            @Override
+            public void onReceived(String message) {
+
+                Log.d("bongoBT", message);
+            }
+
+            @Override
+            public void onError(String reason) {
+                endLoading();
+                Log.d("bongoBT", reason);
+                runnable.run();
+
+
+            }
+        });
 
     }
     //use a separate class for bongobt to manage more accurately

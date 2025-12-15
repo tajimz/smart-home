@@ -13,6 +13,7 @@ public class AlarmHelper extends BroadcastReceiver {
 
         String cmdToSend = intent.getStringExtra("commandToSend");
         Log.d("bongoBT", cmdToSend);
+        MainActivity.bluetoothHelper.sendCommand(cmdToSend);
 
     }
 }
