@@ -139,6 +139,8 @@ Pull requests and feature suggestions are welcome.
 
 ## 📄 License
 
-MIT License
+This code is open for reading and learning purposes only. 
+You may not modify, redistribute, or use it commercially without explicit permission from the author.
+
 
 
