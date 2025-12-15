@@ -32,8 +32,11 @@ import com.tajimz.smarthome.model.DeviceModel;
 import com.tajimz.smarthome.model.RoomModel;
 import com.tajimz.smarthome.sqlite.SqliteDB;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
     FragmentHomeBinding binding;
@@ -92,6 +95,7 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         binding.tvTemp.setText(bluetoothHelper.getTemp().trim()+"° C");
+        binding.tvDate.setText(getCurrentTime());
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -133,6 +137,11 @@ public class HomeFragment extends Fragment {
         }
 
 
+    }
+
+    private String getCurrentTime(){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm\ndd MMM, yyyy", Locale.getDefault());
+        return  sdf.format(new Date());
     }
 
 
