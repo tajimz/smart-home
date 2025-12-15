@@ -108,6 +108,22 @@ public class SqliteDB extends SQLiteOpenHelper {
         db.execSQL(sql);
     }
 
+    public void deleteRoom(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "DELETE FROM roomList WHERE id = " + id;
+        db.execSQL(sql);
+        sql = "DELETE FROM deviceList WHERE roomID = " + id;
+        db.execSQL(sql);
+
+    }
+
+    public void editRoom(String roomId, String roomName, String roomIcon){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "UPDATE roomList SET roomName = '" + roomName + "', roomIcon = '" + roomIcon + "' WHERE id = '" + roomId + "'";
+        db.execSQL(sql);
+    }
+
+
 
 
 

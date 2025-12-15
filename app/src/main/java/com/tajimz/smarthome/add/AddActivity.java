@@ -18,6 +18,7 @@ import com.tajimz.smarthome.adapter.RecyclerIconAdapter;
 import com.tajimz.smarthome.databinding.ActivityAddBinding;
 import com.tajimz.smarthome.helper.BaseActivity;
 import com.tajimz.smarthome.model.IconModel;
+import com.tajimz.smarthome.model.RoomModel;
 import com.tajimz.smarthome.sqlite.SqliteDB;
 
 import java.lang.reflect.Field;
@@ -29,6 +30,7 @@ public class AddActivity extends BaseActivity {
     String reason, roomId;
     RecyclerIconAdapter recyclerIconAdapter;
     List<IconModel> list = new ArrayList<>();
+    RoomModel roomModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,14 @@ public class AddActivity extends BaseActivity {
              binding.edLayType.setVisibility(GONE);
              binding.edLayTurnOn.setVisibility(GONE);
              binding.edLayTurnOff.setVisibility(GONE);
+         }else if (reason.equals("room_edit")){
+             binding.edLayType.setVisibility(GONE);
+             binding.edLayTurnOn.setVisibility(GONE);
+             binding.edLayTurnOff.setVisibility(GONE);
+              roomModel = (RoomModel) getIntent().getSerializableExtra("roomModel");
+             binding.tvReason.setText("Edit Room: "+roomModel.getRoomName());
+             binding.edName.setText(roomModel.getRoomName());
+
          }
 
     }
@@ -74,6 +84,10 @@ public class AddActivity extends BaseActivity {
             }else if (reason.equals("room")){
                 sqliteDB.insertRoom(name, icon);
                 Toast.makeText(this, "Created Room : "+name, Toast.LENGTH_SHORT).show();
+
+            }else if (reason.equals("room_edit")){
+                sqliteDB.editRoom(roomModel.getRoomId(), name, icon);
+                Toast.makeText(this, "Edited Room : "+name, Toast.LENGTH_SHORT).show();
 
             }
 

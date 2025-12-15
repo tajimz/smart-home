@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -67,6 +68,11 @@ public class HomeFragment extends Fragment {
                 if (deviceList.isEmpty()) binding.tvNoDeviceFound.setVisibility(VISIBLE);
                 else binding.tvNoDeviceFound.setVisibility(GONE);
             }
+
+            @Override
+            public void onPopupItemSelected(RoomModel roomModel, MenuItem menuItem) {
+                //unnecessary here
+            }
         });
         binding.recyclerRoom.setAdapter(recyclerRoomAdapter);
         binding.recyclerRoom.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -86,6 +92,14 @@ public class HomeFragment extends Fragment {
         if (!recyclerInited || list.isEmpty() ) {
             binding.tvNoRoomsFound.setVisibility(VISIBLE);
             binding.tvNoDeviceFound.setVisibility(VISIBLE);
+            recyclerRoomAdapter.notifyDataSetChanged();
+            try{
+                deviceList.clear();
+                recyclerDeviceAdapter.notifyDataSetChanged();
+            }catch (RuntimeException e){
+
+            }
+
             return;
         }
         binding.tvNoRoomsFound.setVisibility(GONE);

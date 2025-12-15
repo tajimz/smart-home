@@ -1,6 +1,8 @@
 package com.tajimz.smarthome.model;
 
-public class RoomModel {
+import java.io.Serializable;
+
+public class RoomModel implements Serializable {
     String roomName ;
     String roomIcon;
     String roomId;

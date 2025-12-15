@@ -3,6 +3,7 @@ package com.tajimz.smarthome.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 
@@ -40,6 +41,7 @@ public class RecyclerRoomAdapter extends RecyclerView.Adapter<RecyclerRoomAdapte
     }
     public interface OnItemClickListener {
             void onItemSelected(RoomModel roomModel);
+            void onPopupItemSelected(RoomModel roomModel, MenuItem menuItem);
     }
     @NonNull
     @Override
@@ -87,6 +89,10 @@ public class RecyclerRoomAdapter extends RecyclerView.Adapter<RecyclerRoomAdapte
             binding.imgMenu.setOnClickListener(v->{
                 PopupMenu menu = new PopupMenu(context, v);
                 menu.getMenuInflater().inflate(R.menu.menu_room, menu.getMenu());
+                menu.setOnMenuItemClickListener(item->{
+                    onItemClickListener.onPopupItemSelected(roomModel, item);
+                    return true;
+                });
                 menu.show();
             });
 

@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.tajimz.smarthome.MainActivity;
+import com.tajimz.smarthome.R;
 import com.tajimz.smarthome.adapter.RecyclerRoomAdapter;
 import com.tajimz.smarthome.add.AddActivity;
 import com.tajimz.smarthome.databinding.FragmentDeviceBinding;
@@ -57,7 +59,29 @@ public class DeviceFragment extends Fragment {
             binding.tvRoomNotFound.setVisibility(VISIBLE);
 
         }
-        recyclerRoomAdapter = new RecyclerRoomAdapter(getContext(), list, false,null);
+        recyclerRoomAdapter = new RecyclerRoomAdapter(getContext(), list, false, new RecyclerRoomAdapter.OnItemClickListener() {
+            @Override
+            public void onItemSelected(RoomModel roomModel) {
+
+            }
+            //unnecessary here
+
+            @Override
+            public void onPopupItemSelected(RoomModel roomModel, MenuItem menuItem) {
+
+                if (menuItem.getItemId() == R.id.deleteRoom) {
+                 sqliteDB.deleteRoom(roomModel.getRoomId());
+                 refresh();
+
+                }else if (menuItem.getItemId() == R.id.editRoom){
+                    Intent intent = new Intent(requireContext(), AddActivity.class);
+                    intent.putExtra("reason","room_edit");
+                    intent.putExtra("roomModel", roomModel);
+                    startActivity(intent);
+
+                }
+            }
+        });
         binding.recyclerDevice.setAdapter(recyclerRoomAdapter);
         binding.recyclerDevice.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerInited = true;
@@ -134,13 +158,16 @@ public class DeviceFragment extends Fragment {
         //refreshRecycler
         checkControllerStatus();
         if (!recyclerInited) return;
+        refresh();
+
+
+    }
+    private void refresh(){
         list.clear();
         list.addAll(sqliteDB.getRooms());
         recyclerRoomAdapter.notifyDataSetChanged();
 
         if (list.isEmpty()) binding.tvRoomNotFound.setVisibility(VISIBLE);
         else binding.tvRoomNotFound.setVisibility(GONE);
-
-
     }
 }
