@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tajimz.smarthome.MainActivity;
 import com.tajimz.smarthome.databinding.ItemDeviceBinding;
+import com.tajimz.smarthome.helper.BluetoothHelper;
 import com.tajimz.smarthome.model.DeviceModel;
 
 import java.util.List;
@@ -20,12 +21,11 @@ import ai.bongotech.bt.BongoBT;
 public class RecyclerDeviceAdapter extends RecyclerView.Adapter<RecyclerDeviceAdapter.DeviceViewHolder> {
     Context context;
     List<DeviceModel> list;
-    BongoBT bongoBT;
+    BluetoothHelper bluetoothHelper = MainActivity.bluetoothHelper;
 
     public RecyclerDeviceAdapter(Context context, List<DeviceModel> list){
         this.context = context;
         this.list = list;
-        bongoBT = MainActivity.bongoBT;
     }
     @NonNull
     @Override
@@ -42,18 +42,18 @@ public class RecyclerDeviceAdapter extends RecyclerView.Adapter<RecyclerDeviceAd
         holder.binding.itemType.setText(deviceModel.getDeviceType());
         holder.binding.imgItem.setImageResource(Integer.parseInt(deviceModel.getDeviceIcon()));
         holder.binding.switchBtn.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (bongoBT.getConnectedDevice()==null) {
+            if (!bluetoothHelper.isConnected()) {
                 Toast.makeText(context, "Controller Not connected", Toast.LENGTH_SHORT).show();
                 buttonView.setChecked(!isChecked);
                 return;
             }
             if (isChecked) {
                 Toast.makeText(context, "on", Toast.LENGTH_SHORT).show();
-                bongoBT.sendCommand(deviceModel.getTurnOnCMD());
+                bluetoothHelper.sendCommand(deviceModel.getTurnOnCMD());
                 Log.d("bongoBT", deviceModel.getTurnOnCMD());
             }
             else {
-                bongoBT.sendCommand(deviceModel.getTurnOffCMD());
+                bluetoothHelper.sendCommand(deviceModel.getTurnOffCMD());
                 Log.d("bongoBT", deviceModel.getTurnOffCMD());
             }
 

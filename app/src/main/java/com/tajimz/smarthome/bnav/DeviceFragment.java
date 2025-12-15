@@ -18,6 +18,7 @@ import com.tajimz.smarthome.MainActivity;
 import com.tajimz.smarthome.adapter.RecyclerRoomAdapter;
 import com.tajimz.smarthome.add.AddActivity;
 import com.tajimz.smarthome.databinding.FragmentDeviceBinding;
+import com.tajimz.smarthome.helper.BluetoothHelper;
 import com.tajimz.smarthome.helper.CONSTANTS;
 import com.tajimz.smarthome.model.RoomModel;
 import com.tajimz.smarthome.sqlite.SqliteDB;
@@ -33,7 +34,8 @@ public class DeviceFragment extends Fragment {
     List<RoomModel> list;
     RecyclerRoomAdapter recyclerRoomAdapter;
     Boolean recyclerInited = false;
-    BongoBT bongoBT;
+    BluetoothHelper bluetoothHelper;
+
 
 
     @Override
@@ -48,7 +50,7 @@ public class DeviceFragment extends Fragment {
     }
 
     private void setupRecycler(){
-        bongoBT = MainActivity.bongoBT;
+        bluetoothHelper = MainActivity.bluetoothHelper;
         sqliteDB = new SqliteDB(getContext());
          list = sqliteDB.getRooms();
         if (list.isEmpty()){
@@ -89,7 +91,7 @@ public class DeviceFragment extends Fragment {
     }
 
     private void checkControllerStatus(){
-        if (MainActivity.deviceConnected){
+        if (bluetoothHelper.isConnected()){
             binding.tvController.setText("Controller Connected");
             binding.tvConnectController.setText("Disconnect");
             // false if controller not connected
@@ -102,28 +104,28 @@ public class DeviceFragment extends Fragment {
     }
 
     private void connectController(){
-        bongoBT.connectTo(CONSTANTS.CONTROLLER_MAC, new BongoBT.BtConnectListener() {
+
+        bluetoothHelper.connectToController(CONSTANTS.CONTROLLER_MAC, new BongoBT.BtConnectListener() {
             @Override
             public void onConnected() {
-                MainActivity.deviceConnected = true;
                 checkControllerStatus();
                 Log.d("bongoBT", "connected");
-                bongoBT.sendCommand("off");
             }
 
             @Override
             public void onReceived(String message) {
 
+                Log.d("bongoBT", message);
             }
 
             @Override
             public void onError(String reason) {
                 Log.d("bongoBT", reason);
                 Toast.makeText(getContext(), reason, Toast.LENGTH_SHORT).show();
-                MainActivity.deviceConnected = false;
                 checkControllerStatus();
             }
         });
+
     }
 
     @Override
