@@ -3,6 +3,7 @@ package com.tajimz.smarthome;
 import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setupEdgeToEdgePadding(){
         EdgeToEdge.enable(this);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView()).setAppearanceLightStatusBars(false);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
