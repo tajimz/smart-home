@@ -119,6 +119,5 @@ public class MainActivity extends BaseActivity {
         });
 
     }
-    //use a separate class for bongobt to manage more accurately
-    //update the weather information also
+
 }
