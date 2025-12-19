@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.tajimz.smarthome.helper.CONSTANTS;
 import com.tajimz.smarthome.model.DeviceModel;
 import com.tajimz.smarthome.model.RoomModel;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

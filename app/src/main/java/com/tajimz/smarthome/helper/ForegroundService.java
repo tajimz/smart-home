@@ -8,7 +8,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -19,8 +18,6 @@ import com.tajimz.smarthome.R;
 
 import java.io.OutputStream;
 import java.util.UUID;
-
-import ai.bongotech.bt.BongoBT;
 
 public class ForegroundService extends Service {
 

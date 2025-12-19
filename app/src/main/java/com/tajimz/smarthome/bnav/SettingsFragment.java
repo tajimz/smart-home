@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.tajimz.smarthome.R;
 import com.tajimz.smarthome.activities.DeviceActivity;
 import com.tajimz.smarthome.adapter.RecyclerScheduleAdapter;
 import com.tajimz.smarthome.databinding.FragmentSettingsBinding;

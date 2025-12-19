@@ -3,8 +3,7 @@ package com.tajimz.smarthome.adapter;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +21,6 @@ import com.tajimz.smarthome.model.DeviceModel;
 import java.util.Calendar;
 import java.util.List;
 
-import ai.bongotech.bt.BongoBT;
 
 public class RecyclerDeviceAdapter extends RecyclerView.Adapter<RecyclerDeviceAdapter.DeviceViewHolder> {
     Context context;

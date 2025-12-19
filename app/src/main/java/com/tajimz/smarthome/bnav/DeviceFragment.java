@@ -8,12 +8,10 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.tajimz.smarthome.MainActivity;
 import com.tajimz.smarthome.R;
@@ -21,7 +19,6 @@ import com.tajimz.smarthome.adapter.RecyclerRoomAdapter;
 import com.tajimz.smarthome.add.AddActivity;
 import com.tajimz.smarthome.databinding.FragmentDeviceBinding;
 import com.tajimz.smarthome.helper.BluetoothHelper;
-import com.tajimz.smarthome.helper.CONSTANTS;
 import com.tajimz.smarthome.model.RoomModel;
 import com.tajimz.smarthome.sqlite.SqliteDB;
 

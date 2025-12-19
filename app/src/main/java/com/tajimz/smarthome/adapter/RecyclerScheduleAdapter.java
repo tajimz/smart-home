@@ -2,13 +2,11 @@ package com.tajimz.smarthome.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tajimz.smarthome.R;
 import com.tajimz.smarthome.databinding.ItemRoom2Binding;
 import com.tajimz.smarthome.model.DeviceModel;
 import com.tajimz.smarthome.sqlite.SqliteDB;
