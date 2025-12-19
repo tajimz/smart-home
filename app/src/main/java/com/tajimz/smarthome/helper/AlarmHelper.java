@@ -3,6 +3,7 @@ package com.tajimz.smarthome.helper;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 
 import com.tajimz.smarthome.MainActivity;
@@ -13,7 +14,10 @@ public class AlarmHelper extends BroadcastReceiver {
 
         String cmdToSend = intent.getStringExtra("commandToSend");
         Log.d("bongoBT", cmdToSend);
-        MainActivity.bluetoothHelper.sendCommand(cmdToSend);
+        Intent intent1 = new Intent(context, ForegroundService.class);
+        intent1.putExtra("command", cmdToSend);
+        context.startForegroundService(intent1);
+
 
     }
 }
